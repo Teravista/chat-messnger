@@ -20,7 +20,7 @@ public class reciver implements Runnable{
             while(true)
             {
                 ByteBuffer buffer = ByteBuffer.allocate(256);
-                socket.read(buffer);
+                    socket.read(buffer);
                 buffer.position();
                 byte[] bytes = buffer.array();
                 bytes[buffer.position()]='\0';
@@ -30,7 +30,7 @@ public class reciver implements Runnable{
         }
         catch (IOException ex)
         {
-            System.err.println(ex);
+            System.out.println("thread closed");
         }
     }
 }

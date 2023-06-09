@@ -18,7 +18,7 @@ public class Main {
         ByteBuffer buffer;
         try {
             client = SocketChannel.open(new InetSocketAddress("localhost", 8080));
-            System.out.println("connected");
+            System.out.println("connected, to close connection type:  end");
             reciver reciver = new reciver(client);
             Thread thread = new Thread(reciver);
             thread.start();
@@ -27,12 +27,19 @@ public class Main {
             {
                 Scanner scanner = new Scanner(System.in);
                 String str = scanner.nextLine();
+                if(str.equals("end"))
+                {
+                    client.write(ByteBuffer.wrap("end".getBytes()));
+                    thread.interrupt();
+                    client.close();
+                    return;
+                }
                 buffer=ByteBuffer.wrap(str.getBytes());
                 client.write(buffer);
             }
         } catch (IOException ex) {
 
-            System.err.println(ex);
+            System.out.println("couldn't connect");
         }
 
     }

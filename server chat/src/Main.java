@@ -49,7 +49,7 @@ public class Main {
         int r = client.read(buffer);
         if (r == -1 || new String(buffer.array()).trim().equals("end")) {
             client.close();
-            System.out.println("Not accepting client messages anymore");
+            System.out.println("one of cleints disconnected");
         }
         else {
             for (SocketChannel key: socketMessegMap.keySet()) {

@@ -35,9 +35,9 @@ public class Sender implements Runnable{
             }
         }
         } catch (IOException e) {
-            System.out.println("reciving stoped");
+
         } catch (InterruptedException e) {
-System.out.println("interruption");
+            System.out.println("interruption");
         }
     }
 }
