@@ -34,7 +34,7 @@ public class Main {
                     register(selector, serverSocket,socketMessegMap);
                 }
                 if (key.isReadable()) {
-                    respond(buffer, key,socketMessegMap);
+                    readAndRespond(buffer, key,socketMessegMap);
                 }
                 iter.remove();
             }
@@ -42,11 +42,11 @@ public class Main {
 
     }
 
-    private static void respond(ByteBuffer buffer, SelectionKey keyy,Map<SocketChannel, List<ByteBuffer>> socketMessegMap) throws IOException
+    private static void readAndRespond(ByteBuffer buffer, SelectionKey keyy,Map<SocketChannel, List<ByteBuffer>> socketMessegMap) throws IOException
     {
         SocketChannel client = (SocketChannel) keyy.channel();
+
         int r = client.read(buffer);
-       String str =  new String(buffer.array()).trim();
         if (r == -1 || new String(buffer.array()).trim().equals("end")) {
             client.close();
             System.out.println("Not accepting client messages anymore");

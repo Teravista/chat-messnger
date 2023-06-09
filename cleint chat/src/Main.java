@@ -18,7 +18,6 @@ public class Main {
         ByteBuffer buffer;
         try {
             client = SocketChannel.open(new InetSocketAddress("localhost", 8080));
-            buffer = ByteBuffer.allocate(256);
             System.out.println("connected");
             reciver reciver = new reciver(client);
             Thread thread = new Thread(reciver);
@@ -32,6 +31,7 @@ public class Main {
                 client.write(buffer);
             }
         } catch (IOException ex) {
+
             System.err.println(ex);
         }
 
